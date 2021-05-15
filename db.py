@@ -1,18 +1,20 @@
-import sqlite3
-
+import pymongo
+from bson import ObjectId
 
 class Database:
-    def __init__(self, db):
-        self.conn = sqlite3.connect(db)
-        self.cur = self.conn.cursor()
-        self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS parts (id INTEGER PRIMARY KEY, part text, customer text, retailer text, price text)")
-        self.conn.commit()
+    def __init__(self):
+        # CONNECT TO DATABASE
+        connection = pymongo.MongoClient("localhost", 27017)
+        # CREATE DATABASE
+        database = connection['ass8_database']
+        # CREATE COLLECTION
+        collection = database['parts']
+        print("Database connected")
 
-    def fetch(self):
-        self.cur.execute("SELECT * FROM parts")
-        rows = self.cur.fetchall()
-        return rows
+    def fetch():
+        data = collection.find()
+        return list(data)
+        
 
     def insert(self, part, customer, retailer, price):
         self.cur.execute("INSERT INTO parts VALUES (NULL, ?, ?, ?, ?)",
