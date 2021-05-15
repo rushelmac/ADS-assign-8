@@ -3,7 +3,7 @@ from tkinter import messagebox
 from db import Database
 
 # Instanciate databse object
-db = Database('store.db')
+db = Database()
 
 # Main Application/GUI class
 
