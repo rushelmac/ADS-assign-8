@@ -2,36 +2,33 @@ import pymongo
 from bson import ObjectId
 
 class Database:
-    def __init__(self):
-        # CONNECT TO DATABASE
-        connection = pymongo.MongoClient("localhost", 27017)
-        # CREATE DATABASE
-        database = connection['ass8_database']
-        # CREATE COLLECTION
-        collection = database['parts']
-        print("Database connected")
+    # CONNECT TO DATABASE
+    connection = pymongo.MongoClient("localhost", 27017)
+    # CREATE DATABASE
+    database = self.connection['ass8_database']
+    # CREATE COLLECTION
+    collection = database['parts']
+    print("Database connected")
 
-    def fetch():
-        data = collection.find()
+    def fetch(self):
+        data = self.collection.find()
         return list(data)
         
 
     def insert(self, part, customer, retailer, price):
-        self.cur.execute("INSERT INTO parts VALUES (NULL, ?, ?, ?, ?)",
-                         (part, customer, retailer, price))
-        self.conn.commit()
+        document = self.collection.insert_one({"part":part, "customer": customer, "retailer": retailer, "price":price})
+        return document.inserted_id
 
     def remove(self, id):
-        self.cur.execute("DELETE FROM parts WHERE id=?", (id,))
-        self.conn.commit()
+        document = self.collection.delete_one({'_id': ObjectId(id)})
+        return document.acknowledged
 
     def update(self, id, part, customer, retailer, price):
-        self.cur.execute("UPDATE parts SET part = ?, customer = ?, retailer = ?, price = ? WHERE id = ?",
-                         (part, customer, retailer, price, id))
-        self.conn.commit()
+        document = self.collection.update_one({'_id': ObjectId(id)}, {"$set": {"_id": id, "part":part, "customer":customer, "retailer":retailer, "price":price}})
+        return document.acknowledged
 
     def __del__(self):
-        self.conn.close()
+        self.connection.close()
 
 
 # db = Database('store.db')
