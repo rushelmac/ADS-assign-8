@@ -5,7 +5,7 @@ class Database:
     # CONNECT TO DATABASE
     connection = pymongo.MongoClient("localhost", 27017)
     # CREATE DATABASE
-    database = self.connection['ass8_database']
+    database = connection['ass8_database']
     # CREATE COLLECTION
     collection = database['parts']
     print("Database connected")
