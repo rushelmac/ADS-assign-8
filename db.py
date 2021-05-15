@@ -2,8 +2,12 @@ import pymongo
 from bson import ObjectId
 
 class Database:
-    # CONNECT TO DATABASE
+    # CONNECT TO LOCAL DATABASE
     connection = pymongo.MongoClient("localhost", 27017)
+    
+    #CONNECT TO CLOUD DATABASE
+    client = pymongo.MongoClient("mongodb+srv://TeamThailaiva:<1234abcd>@cluster0.xnpzq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
     # CREATE DATABASE
     database = connection['ass8_database']
     # CREATE COLLECTION
