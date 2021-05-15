@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from db import Database
 
-db = Database('store.db')
+db = Database()
 
 
 def populate_list():
