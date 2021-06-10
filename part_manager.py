@@ -8,7 +8,8 @@ db = Database()
 def populate_list():
     parts_list.delete(0, END)
     for row in db.fetch():
-        parts_list.insert(END, row)
+        data = row["part"] + " | "+ row["customer"] + " | " + row["retailer"] + " | " + row["price"]
+        parts_list.insert(END, data)
 
 
 def add_item():
@@ -113,7 +114,7 @@ update_btn.grid(row=2, column=2)
 clear_btn = Button(app, text='Clear Input', width=12, command=clear_text)
 clear_btn.grid(row=2, column=3)
 
-app.title('Spare Parts Store Manager')
+app.title('Part Manager')
 app.geometry('700x350')
 
 # Populate data
