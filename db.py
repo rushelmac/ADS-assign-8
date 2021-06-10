@@ -6,8 +6,8 @@ class Database:
     # connection = pymongo.MongoClient("localhost", 27017)
     
     #CONNECT TO CLOUD DATABASE
-    conection = pymongo.MongoClient("mongodb+srv://TeamThailaiva:<1234abcd>@cluster0.xnpzq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-
+    # collection = pymongo.MongoClient("mongodb+srv://TeamThailaiva:<1234abcd>@cluster0.xnpzq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    connection = pymongo.MongoClient("localhost", 27017)
     # CREATE DATABASE
     database = connection['ass8_database']
     # CREATE COLLECTION
